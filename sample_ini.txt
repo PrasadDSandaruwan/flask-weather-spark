@@ -1,0 +1,13 @@
+
+
+[PROD]
+DB_URI = mongodb+srv://<username>:<password>@<your-atlas-cluster-address>/<db>?rest
+
+[TEST]
+DB_URI = mongodb+srv://<username>:<password>@<your-atlas-cluster-address>/<db>?rest
+
+[KEY]
+SECRET_KEY = "weatherSpark"
+
+[TOKEN]
+EXP_MIN = 100

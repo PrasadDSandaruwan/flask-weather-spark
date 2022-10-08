@@ -1,0 +1,6 @@
+flask
+pymongo[srv]
+Flask-PyMongo
+flask-cors
+PyJWT
+flask-bcrypt
