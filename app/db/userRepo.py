@@ -1,8 +1,6 @@
 from app.config.db import get_db
 from werkzeug.local import LocalProxy
 
-
-
 db = LocalProxy(get_db)
 
 
@@ -21,5 +19,3 @@ def getUserByEmailRepo(email):
         return db.user.aggregate(pipeline).next()
     except:
         return None
-
-

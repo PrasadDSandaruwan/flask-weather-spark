@@ -7,6 +7,7 @@ from app.utility.jwt import authentication
 
 
 from app.services.userService import addUserService, loginService
+from app.db.dashboardRepo import getWeather, getYearMonthAvg, getSummerSolarBubbleList, getWinterSolarBubbleList, getAutumnSolarBubbleList, getSpringSolarBubbleList
 
 user_route = Blueprint(
     'user_route', 'user_route', url_prefix='/api/v1/user')
@@ -46,4 +47,30 @@ def login():
          
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+
+
+@user_route.route("/weather",methods=["GET"])
+def getData():
+    return getWeather()
+
+@user_route.route("/yearmonthavg",methods=["GET"])
+def getData1():
+    return getYearMonthAvg()
+
+@user_route.route("/summersolarbubble",methods=["GET"])
+def getData2():
+    return getSummerSolarBubbleList()
+
+@user_route.route("/wintersolarbubble",methods=["GET"])
+def getData3():
+    return getWinterSolarBubbleList()
+
+@user_route.route("/springsolarbubble",methods=["GET"])
+def getData4():
+    return getSpringSolarBubbleList()
+
+@user_route.route("/autumnsolarbubble",methods=["GET"])
+def getData5():
+    return getAutumnSolarBubbleList()
+
 
