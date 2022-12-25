@@ -4,11 +4,18 @@ from datetime import timedelta
 
 from app.db.forecastRepo import getTempBetweenTwoDates,getCurrentWeather, getWeatherBetweenTwoDates
 
+"""
+in date format 3 has to change for -%d
+if lenth != given condition, model have to predict the value and
+    store in the database
+
+"""
+
 def getMinMaxTemp():
     t = timezone("Australia/Melbourne")
     now = datetime.now(t)
 
-    now = now.strftime("%Y-%m-%d 00:00:00")
+    now = now.strftime("%Y-%m-3 00:00:00")
     now = datetime.strptime(now,"%Y-%m-%d %H:%M:%S")
 
     one_day = now+timedelta( days=1)
@@ -43,7 +50,7 @@ def getMinMaxTemp():
 def getWeatherNowService():
     t = timezone("Australia/Melbourne")
     now = datetime.now(t)
-    now = now.strftime("%Y-%m-%d %H:00:00")
+    now = now.strftime("%Y-%m-3 %H:00:00")
     #print(now)
     now = datetime.strptime(now,"%Y-%m-%d %H:%M:%S")
 
@@ -66,7 +73,7 @@ def getWeatherNowService():
 def getWeekDaysNames():
     t = timezone("Australia/Melbourne")
     now = datetime.now(t)
-    now = now.strftime("%Y-%m-%d 00:00:00")
+    now = now.strftime("%Y-%m-3 00:00:00")
     now = datetime.strptime(now,"%Y-%m-%d %H:%M:%S")
 
     res=[]
@@ -82,15 +89,15 @@ def getNextSevenDaysPrediction():
     t = timezone("Australia/Melbourne")
     now = datetime.now(t)
 
-    now = now.strftime("%Y-%m-%d 00:00:00")
+    now = now.strftime("%Y-%m-3 00:00:00")
     now = datetime.strptime(now,"%Y-%m-%d %H:%M:%S")
 
-    one_day = now+timedelta( days=7)
+    seven_days = now+timedelta( days=7)
 
-    one_day = one_day.strftime("%Y-%m-%d 00:00:00")
-    one_day = datetime.strptime(one_day,"%Y-%m-%d %H:%M:%S")
+    seven_days = seven_days.strftime("%Y-%m-%d 00:00:00")
+    seven_days = datetime.strptime(seven_days,"%Y-%m-%d %H:%M:%S")
 
-    results = getWeatherBetweenTwoDates(now,one_day)
+    results = getWeatherBetweenTwoDates(now,seven_days)
 
     res = {}
 
