@@ -13,6 +13,7 @@ import configparser
 
 from app.api.test_routes import route_test
 from app.api.user import user_route
+from app.api.forecast import forecast_route
 
 
 
@@ -39,6 +40,7 @@ def create_app():
     app.json_encoder = MongoJsonEncoder
     app.register_blueprint(route_test)
     app.register_blueprint(user_route)
+    app.register_blueprint(forecast_route)
 
     return app
 
