@@ -116,23 +116,23 @@ def getNextSevenDaysPrediction():
     results = getWeatherBetweenTwoDates(now,seven_days)
     # print("lenth",len(list(results[0])))
     # print( "FALSE",len(list(results[0]))==0)
-    # if len(list(results[0]))==0:
-    #     print("HERE")
-    #     getTemperturePrediction()
-    #     results = getWeatherBetweenTwoDates(now,seven_days)
-    #     if len(list(results[0]))==0:
-    #         return {}
+    if len(list(results[0]))==0:
+        print("HERE")
+        getTemperturePrediction()
+        results = getWeatherBetweenTwoDates(now,seven_days)
+        if len(list(results[0]))==0:
+            return {}
 
 
     res = {}
 
 
     c=0
-    print(len(list(results[0])))
-    print(list(results[0]))
+    #print(len(list(results[0])))
+    #print(list(results[0]))
     for data in results:
         data = list(data)
-        print("DATA",data)
+        #print("DATA",len(list(data)))
 
         if c==0:
             res["dates"] = [ i["date"].strftime("%H-%M")   for i in data]

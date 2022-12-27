@@ -40,7 +40,7 @@ def getWeatherBetweenTwoDates(first,second):
             } 
         })
 
-    return [temp,hum,solar]
+    return [list(temp),list(hum),list(solar)]
     
     
 
@@ -77,7 +77,7 @@ def getCurrentWeather(date):
         hum =db.huminidy_pred.aggregate(pipeline).next()
         solar =db.solar_pred.aggregate(pipeline).next()
 
-        return [temp, hum, solar]
+        return [list(temp), list(hum), list(solar)]
      
     except:
         return None
