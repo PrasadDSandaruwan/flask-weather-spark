@@ -3,7 +3,7 @@ from flask_cors import CORS
 
 
 from app.utility.jwt import authentication 
-from app.services.forecastService import getMinMaxTemp,getWeatherNowService,getNextSevenDaysPrediction,getWeekDaysNames, updateToPredictData
+from app.services.forecastService import getMinMaxTemp,getWeatherNowService,getNextSevenDaysPrediction,getWeekDaysNames, updateToPredictData,getTemperturePrediction
 from app.db.forecastRepo import insertTemp
 
 from datetime import datetime
@@ -100,3 +100,8 @@ def insertPred():
     return jsonify({"data" :"OK"}),200
     
 
+
+@forecast_route.route("/data",methods=["GET"])
+def check():
+    getTemperturePrediction()
+    return jsonify({"data" :"OK"}),200
