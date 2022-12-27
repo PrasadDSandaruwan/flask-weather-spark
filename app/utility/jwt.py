@@ -27,8 +27,9 @@ def authentication(f):
     def decorated(*args, **kwargs):
         token = None
         # jwt is passed in the request header
-        if 'x-access-token' in request.headers:
-            token = request.headers['x-access-token']
+        print(request.headers["token"])
+        if 'token' in request.headers:
+            token = request.headers['token']
         # return 401 if token is not passed
         if not token:
             return jsonify({'message' : 'Token is missing !!'}), 401
@@ -39,7 +40,7 @@ def authentication(f):
 
 
             email = data["email"]
-            user = getUserByEmailRepo("s")
+            user = getUserByEmailRepo(email)
  
             if not user:
                 return jsonify({'message' : 'Invalid Token !!'}), 401

@@ -56,6 +56,10 @@ def insertTemp(data,data1,data2):
     db.huminidy_pred.insert_one(data)
     db.solar_pred.insert_one(data2)
 
+def insertCSV(data):
+    db.to_pred.insert_many(data)
+
+
 def getCurrentWeather(date):
 
     pipeline = [

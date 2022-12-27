@@ -7,7 +7,10 @@ from app.utility.jwt import generateToken
 
 
 def loginService(email,password):
+    print(email,password)
     user = getUserByEmailRepo(email)
+
+    print(email+ " "+password)
 
     if not user:
         return jsonify({'message' : 'Invalid Login !!'}), 401

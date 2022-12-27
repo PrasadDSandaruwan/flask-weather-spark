@@ -2,7 +2,9 @@ from pytz import timezone
 from datetime import datetime
 from datetime import timedelta
 
-from app.db.forecastRepo import getTempBetweenTwoDates,getCurrentWeather, getWeatherBetweenTwoDates
+from app.db.forecastRepo import getTempBetweenTwoDates,getCurrentWeather, getWeatherBetweenTwoDates, insertCSV
+
+
 
 """
 in date format 3 has to change for -%d
@@ -92,7 +94,7 @@ def getNextSevenDaysPrediction():
     now = now.strftime("%Y-%m-3 00:00:00")
     now = datetime.strptime(now,"%Y-%m-%d %H:%M:%S")
 
-    seven_days = now+timedelta( days=7)
+    seven_days = now+timedelta( days=1)
 
     seven_days = seven_days.strftime("%Y-%m-%d 00:00:00")
     seven_days = datetime.strptime(seven_days,"%Y-%m-%d %H:%M:%S")
@@ -104,8 +106,9 @@ def getNextSevenDaysPrediction():
     c=0
     for data in results:
         data = list(data)
+
         if c==0:
-            res["dates"] = [ i["date"] for i in data]
+            res["dates"] = [ i["date"].strftime("%H-%M")   for i in data]
             c+=1
 
         k = data[0].keys()
@@ -117,6 +120,11 @@ def getNextSevenDaysPrediction():
         res[key]= [i[key] for i in data]
     
     return res
+
+
+def updateToPredictData(data):
+    insertCSV(data)
+
         
 
         
