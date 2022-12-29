@@ -47,9 +47,9 @@ def getWeatherBetweenTwoDates(first,second):
 
 def insertTemp(data,data1,data2):
     print(data)
-    db.temp_pred.insert_one(data1)
-    db.huminidy_pred.insert_one(data)
-    db.solar_pred.insert_one(data2)
+    db.temp_pred.inser_many(data1)
+    db.huminidy_pred.inser_many(data)
+    db.solar_pred.inser_many(data2)
 
 def insertCSV(data):
     db.to_pred.insert_many(data)
@@ -77,33 +77,19 @@ def getCurrentWeather(date):
         hum =db.huminidy_pred.aggregate(pipeline).next()
         solar =db.solar_pred.aggregate(pipeline).next()
 
-        return [list(temp), list(hum), list(solar)]
+        return [temp, hum, solar]
      
     except:
         return None
 
 def getLastSevenDaysTemperature():
-    pipeline = [
-    
-        {
-            "$sort": { #stage 2: sort the remainder last-first
-                "timestamp": -1
-            }
-        },
-        {
-            "$limit": 7 #stage 3: keep only 20 of the descending order subset
-        },
-        {
-            "$sort": {
-                "rt": 1 #stage 4: sort back to ascending order
-            }
-        },
-        {
-            "$project": { # stage 5: add any fields you want to show in your results
-                "_id": 1,
-                "timestamp" : 1,
-                "temperature": 1
-            }
-        }
-    ]
+
     return db.to_pred.find({})
+
+
+def getLastDaysTemperaturePredicted():
+    temp_data = db.temp_pred.find({})
+    hum_data = db.huminidy_pred.find({})
+    solar_data = db.solar_pred.find({})
+
+    return [temp_data,hum_data,solar_data]
