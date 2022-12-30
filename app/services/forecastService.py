@@ -38,8 +38,8 @@ def getMinMaxTemp():
         
 
         res = {
-            "Min": min(result),
-            "Max": max(result),
+            "Min": round(min(result),2),
+            "Max": round(max(result),2),
             "Avg": round(sum(result)/len(result),2)
         }
 
@@ -68,7 +68,7 @@ def getWeatherNowService():
         if len(list(results[0]))==0:
             return {}
 
-    print(results)
+    #print(results)
     res= {
         "temperature": round(results[0]["temperature"],2),
         "huminidy": round(results[1]["huminidy"],2),
