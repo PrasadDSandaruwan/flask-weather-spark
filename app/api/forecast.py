@@ -37,14 +37,14 @@ def getWeekDays():
 @forecast_route.route("/upload-csv",methods=["GET"])
 def uploadCSV():
     try:
-        # f = request.files["file"]
+        f = request.files["file"]
 
-        f = open('app\datasets\\to_pred.csv', 'r')
+        # f = open('app\datasets\\to_pred.csv', 'r')
     
         
         Lines = f.readlines()
-        # headers = str(Lines[0],'utf-8').rstrip().split(",")
-        headers = str(Lines[0]).rstrip().split(",")
+        headers = str(Lines[0],'utf-8').rstrip().split(",")
+        # headers = str(Lines[0]).rstrip().split(",")
 
         columns = ['temperature',
         'dewpoint_temperature',
@@ -70,8 +70,8 @@ def uploadCSV():
             data = data_2.copy()
             for i in columns:
                 if i == "timestamp":
-                    # data[i]= datetime.strptime(line[data_indexs[i]],"%d/%m/%Y %H:%M")
-                    data[i]= datetime.strptime(line[data_indexs[i]],"%Y-%m-%d %H:%M:%S")
+                    data[i]= datetime.strptime(line[data_indexs[i]],"%d/%m/%Y %H:%M")
+                    # data[i]= datetime.strptime(line[data_indexs[i]],"%Y-%m-%d %H:%M:%S")
                 else:
                     data[i]= line[data_indexs[i]]
             dataset.append(data)
