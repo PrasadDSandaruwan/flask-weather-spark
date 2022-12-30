@@ -57,8 +57,8 @@ def insertCSV(data):
 
 def insertTempMany(data,data1,data2):
     print(data)
-    db.temp_pred.insert_many(data1)
-    db.huminidy_pred.insert_many(data)
+    db.temp_pred.insert_many(data)
+    db.huminidy_pred.insert_many(data1)
     db.solar_pred.insert_many(data2)
 
 

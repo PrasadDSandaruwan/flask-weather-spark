@@ -72,7 +72,7 @@ def getWeatherNowService():
     res= {
         "temperature": round(results[0]["temperature"],2),
         "huminidy": round(results[1]["huminidy"],2),
-        "solar_radiation": round(results[2]["solar_radiation"],2),
+        "solar_radiation": round(results[2]["solar_radiation"],2) if round(results[2]["solar_radiation"],2)>0 else 0,
         "time":now.strftime("%I:00 %p"),
         "date": now.strftime("%Y-%m-%d")
     }
@@ -124,9 +124,11 @@ def getNextSevenDaysPrediction():
     c=0
     k = ["temperature","huminidy","solar_radiation"]
     i=0
+
+
     for data in results:
         
-        #print(data)
+        print(data)
         data = list(data)
 
         if c==0:
@@ -139,8 +141,12 @@ def getNextSevenDaysPrediction():
             if i!="_id" and i!="date":
                 key=i
                 break
+        res[key]=[]
         #print(key)
-        res[key]= [j[key] for j in data]
+        # res[key]= [j[key] for j in data if j[key]> 0 else 0]
+
+        for i in data:
+            res[key].append(i[key]) 
         
     
     return res

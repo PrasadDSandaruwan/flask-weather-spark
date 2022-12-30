@@ -34,14 +34,17 @@ def getWeekDays():
     
 
 
-@forecast_route.route("/upload-csv",methods=["POST"])
+@forecast_route.route("/upload-csv",methods=["GET"])
 def uploadCSV():
     try:
-        f = request.files["file"]
+        # f = request.files["file"]
+
+        f = open('app\datasets\\to_pred.csv', 'r')
     
-        # file1 = open(f, 'r')
+        
         Lines = f.readlines()
-        headers = str(Lines[0],'utf-8').rstrip().split(",")
+        # headers = str(Lines[0],'utf-8').rstrip().split(",")
+        headers = str(Lines[0]).rstrip().split(",")
 
         columns = ['temperature',
         'dewpoint_temperature',
@@ -62,12 +65,13 @@ def uploadCSV():
             data_2[columns[i]]=[]
         #print(data_2)
         for line in Lines[1:]:
-            line=str(line,'utf-8')
+            # line=str(line,'utf-8')
             line= line.rstrip().split(",")
             data = data_2.copy()
             for i in columns:
                 if i == "timestamp":
-                    data[i]= datetime.strptime(line[data_indexs[i]],"%d/%m/%Y %H:%M")
+                    # data[i]= datetime.strptime(line[data_indexs[i]],"%d/%m/%Y %H:%M")
+                    data[i]= datetime.strptime(line[data_indexs[i]],"%Y-%m-%d %H:%M:%S")
                 else:
                     data[i]= line[data_indexs[i]]
             dataset.append(data)
@@ -75,7 +79,8 @@ def uploadCSV():
         updateToPredictData(dataset)
 
         return jsonify({"data" :"OK"}),200
-    except:
+    except Exception as e:
+        print(e)
         return jsonify({"error": "Something went wrong!"}),201
 
 
@@ -83,7 +88,7 @@ def uploadCSV():
 
 @forecast_route.route("/insert",methods=["GET"])
 def insertPred():
-    file1 = open('app\datasets\\to_pred.csv', 'r')
+    file1 = open('app\datasets\\as_pred.csv', 'r')
     Lines = file1.readlines()
 
     dataa = []
@@ -108,7 +113,7 @@ def insertPred():
 
         dataa.append(data)
         dataa1.append(data1)
-        data2.append(data2)
+        dataa2.append(data2)
 
     insertTemp(dataa,dataa1,dataa2)
     return jsonify({"data" :"OK"}),200
