@@ -36,6 +36,7 @@ def addUser():
 
 @user_route.route("/login",methods=["POST"])
 def login():
+    print("LOGIN")
     post_data = request.get_json()
     try:
         email = post_data.get('email')
@@ -46,6 +47,7 @@ def login():
 
          
     except Exception as e:
+        print("ERROR", e)
         return jsonify({'error': str(e)}), 400
 
 
