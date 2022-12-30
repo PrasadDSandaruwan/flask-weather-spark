@@ -25,11 +25,20 @@ def addUser():
         password = post_data.get('password')
 
 
-        addUserService(first_name,last_name,email,password)
-
-        return jsonify({
-            "success": "Successfully added."
-        }),200
+        val = addUserService(first_name,last_name,email,password)
+        print(val)
+        if val == "wrong email": 
+            return jsonify({
+                "error":"Invalid email address"
+            }),401
+        elif val == "wrong password":
+            return jsonify({
+                "error": "Invalid password"
+            }), 400
+        else:
+            return jsonify({
+                "success": "Successfully added."
+            }),200            
            
     except Exception as e:
         return jsonify({'error': str(e)}), 400
