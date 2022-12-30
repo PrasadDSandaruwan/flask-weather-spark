@@ -47,9 +47,9 @@ def getWeatherBetweenTwoDates(first,second):
 
 def insertTemp(data,data1,data2):
     print(data)
-    db.temp_pred.inser_many(data1)
-    db.huminidy_pred.inser_many(data)
-    db.solar_pred.inser_many(data2)
+    db.temp_pred.insert_many(data1)
+    db.huminidy_pred.insert_many(data)
+    db.solar_pred.insert_many(data2)
 
 def insertCSV(data):
     db.to_pred.insert_many(data)
