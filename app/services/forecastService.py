@@ -13,7 +13,7 @@ def getMinMaxTemp():
     t = timezone("Australia/Melbourne")
     now = datetime.now(t)
 
-    now = now.strftime("2021-5-3 00:00:00")
+    now = now.strftime("2021-6-1 00:00:00")
     now = datetime.strptime(now,"%Y-%m-%d %H:%M:%S")
 
     one_day = now+timedelta( days=1)
@@ -53,7 +53,7 @@ def getMinMaxTemp():
 def getWeatherNowService():
     t = timezone("Australia/Melbourne")
     now = datetime.now(t)
-    now = now.strftime("2021-5-3 %H:00:00")
+    now = now.strftime("2021-6-1 %H:00:00")
     #print(now)
     now = datetime.strptime(now,"%Y-%m-%d %H:%M:%S")
 
@@ -82,7 +82,7 @@ def getWeatherNowService():
 def getWeekDaysNames():
     t = timezone("Australia/Melbourne")
     now = datetime.now(t)
-    now = now.strftime("2021-5-3 00:00:00")
+    now = now.strftime("2021-6-1 00:00:00")
     now = datetime.strptime(now,"%Y-%m-%d %H:%M:%S")
 
     res=[]
@@ -98,7 +98,7 @@ def getNextSevenDaysPrediction():
     t = timezone("Australia/Melbourne")
     now = datetime.now(t)
 
-    now = now.strftime("2021-5-24 00:00:00")
+    now = now.strftime("2021-6-1 00:00:00")
     now = datetime.strptime(now,"%Y-%m-%d %H:%M:%S")
 
     seven_days = now+timedelta( days=7)
